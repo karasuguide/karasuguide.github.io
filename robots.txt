@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karasuguide.github.io/sitemap.xml
