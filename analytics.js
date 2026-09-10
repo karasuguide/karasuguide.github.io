@@ -11,12 +11,11 @@ function initializeGoogleAnalytics() {
     return;
   }
 
-  window.karasuAnalyticsInitialized = true;
-
+  window.karasuAnalyticsInitialized =
+    true;
 
   window.dataLayer =
     window.dataLayer || [];
-
 
   window.gtag =
     window.gtag ||
@@ -26,12 +25,10 @@ function initializeGoogleAnalytics() {
       );
     };
 
-
   window.gtag(
     'js',
     new Date()
   );
-
 
   window.gtag(
     'config',
@@ -40,7 +37,6 @@ function initializeGoogleAnalytics() {
       send_page_view: true
     }
   );
-
 
   const script =
     document.createElement(
@@ -54,7 +50,6 @@ function initializeGoogleAnalytics() {
     `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
       KARASU_GA_MEASUREMENT_ID
     )}`;
-
 
   document.head.appendChild(
     script
@@ -93,8 +88,31 @@ function saveAnalyticsConsent(
 
   } catch {
 
-    // If localStorage is unavailable,
-    // continue without persisting consent.
+    // Consent preference could not be persisted.
+  }
+
+}
+
+
+function deleteGoogleAnalyticsCookies() {
+
+  const cookies =
+    document.cookie
+      .split(';')
+      .map(cookie =>
+        cookie
+          .split('=')[0]
+          .trim()
+      )
+      .filter(name =>
+        name === '_ga' ||
+        name.startsWith('_ga_')
+      );
+
+  for (const cookieName of cookies) {
+
+    document.cookie =
+      `${cookieName}=; Max-Age=0; path=/; SameSite=Lax`;
 
   }
 
@@ -108,11 +126,8 @@ function removeConsentBanner() {
       'karasu-consent-banner'
     );
 
-
   if (banner) {
-
     banner.remove();
-
   }
 
 }
@@ -120,13 +135,7 @@ function removeConsentBanner() {
 
 function createConsentBanner() {
 
-  if (
-    document.getElementById(
-      'karasu-consent-banner'
-    )
-  ) {
-    return;
-  }
+  removeConsentBanner();
 
 
   const banner =
@@ -134,9 +143,18 @@ function createConsentBanner() {
       'div'
     );
 
-
   banner.id =
     'karasu-consent-banner';
+
+  banner.setAttribute(
+    'role',
+    'dialog'
+  );
+
+  banner.setAttribute(
+    'aria-label',
+    'Analytics preferences'
+  );
 
 
   banner.innerHTML = `
@@ -185,133 +203,142 @@ function createConsentBanner() {
   `;
 
 
-  const style =
-    document.createElement(
-      'style'
-    );
+  if (
+    !document.getElementById(
+      'karasu-consent-style'
+    )
+  ) {
 
+    const style =
+      document.createElement(
+        'style'
+      );
 
-  style.textContent = `
+    style.id =
+      'karasu-consent-style';
 
-    #karasu-consent-banner {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9999;
-      margin: 0 auto;
-      max-width: 920px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      background: #111923;
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
-      color: #d8e1eb;
-    }
-
-
-    .karasu-consent-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-      padding: 20px 22px;
-    }
-
-
-    .karasu-consent-copy {
-      min-width: 0;
-    }
-
-
-    .karasu-consent-copy strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #f3f7fb;
-      font-size: 15px;
-    }
-
-
-    .karasu-consent-copy p {
-      margin: 0;
-      color: #9eabb9;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-
-    .karasu-consent-copy a {
-      color: #72b7ff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-
-    .karasu-consent-actions {
-      display: flex;
-      flex: 0 0 auto;
-      gap: 10px;
-    }
-
-
-    .karasu-consent-button {
-      min-height: 42px;
-      padding: 0 15px;
-      border-radius: 9px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-
-    .karasu-consent-primary {
-      border: 1px solid rgba(88, 169, 255, 0.4);
-      background: rgba(88, 169, 255, 0.14);
-      color: #82c0ff;
-    }
-
-
-    .karasu-consent-secondary {
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: transparent;
-      color: #b7c2ce;
-    }
-
-
-    @media (max-width: 640px) {
+    style.textContent = `
 
       #karasu-consent-banner {
-        right: 12px;
-        bottom: 12px;
-        left: 12px;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        margin: 0 auto;
+        max-width: 920px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        background: #111923;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        color: #d8e1eb;
       }
 
 
       .karasu-consent-inner {
-        align-items: stretch;
-        flex-direction: column;
-        gap: 16px;
-        padding: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 20px 22px;
+      }
+
+
+      .karasu-consent-copy {
+        min-width: 0;
+      }
+
+
+      .karasu-consent-copy strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #f3f7fb;
+        font-size: 15px;
+      }
+
+
+      .karasu-consent-copy p {
+        margin: 0;
+        color: #9eabb9;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+
+      .karasu-consent-copy a {
+        color: #72b7ff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
 
 
       .karasu-consent-actions {
-        width: 100%;
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
       }
 
 
       .karasu-consent-button {
-        flex: 1;
+        min-height: 42px;
+        padding: 0 15px;
+        border-radius: 9px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
       }
 
-    }
 
-  `;
+      .karasu-consent-primary {
+        border: 1px solid rgba(88, 169, 255, 0.4);
+        background: rgba(88, 169, 255, 0.14);
+        color: #82c0ff;
+      }
 
 
-  document.head.appendChild(
-    style
-  );
+      .karasu-consent-secondary {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: #b7c2ce;
+      }
+
+
+      @media (max-width: 640px) {
+
+        #karasu-consent-banner {
+          right: 12px;
+          bottom: 12px;
+          left: 12px;
+        }
+
+
+        .karasu-consent-inner {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 16px;
+          padding: 18px;
+        }
+
+
+        .karasu-consent-actions {
+          width: 100%;
+        }
+
+
+        .karasu-consent-button {
+          flex: 1;
+        }
+
+      }
+
+    `;
+
+    document.head.appendChild(
+      style
+    );
+
+  }
 
 
   document.body.appendChild(
@@ -350,6 +377,8 @@ function createConsentBanner() {
         saveAnalyticsConsent(
           'denied'
         );
+
+        deleteGoogleAnalyticsCookies();
 
         removeConsentBanner();
 
@@ -398,7 +427,6 @@ function trackAffiliateClick(
     'event',
     'affiliate_click',
     {
-
       program_name:
         programName ||
         'unknown',
@@ -411,7 +439,6 @@ function trackAffiliateClick(
 
       page_title:
         document.title
-
     }
   );
 
@@ -427,7 +454,6 @@ function registerAffiliateTracking() {
       const target =
         event.target;
 
-
       if (
         !(target instanceof Element)
       ) {
@@ -439,7 +465,6 @@ function registerAffiliateTracking() {
         target.closest(
           'a'
         );
-
 
       if (!link) {
         return;
@@ -477,9 +502,47 @@ function registerAffiliateTracking() {
 }
 
 
+function registerPrivacySettingsLinks() {
+
+  document.addEventListener(
+    'click',
+    event => {
+
+      const target =
+        event.target;
+
+      if (
+        !(target instanceof Element)
+      ) {
+        return;
+      }
+
+
+      const settingsLink =
+        target.closest(
+          '[data-karasu-analytics-settings]'
+        );
+
+      if (!settingsLink) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+      createConsentBanner();
+
+    }
+  );
+
+}
+
+
 function startKarasuAnalytics() {
 
   registerAffiliateTracking();
+
+  registerPrivacySettingsLinks();
 
 
   const consent =
