@@ -7,28 +7,40 @@ const KARASU_CONSENT_KEY =
 
 function initializeGoogleAnalytics() {
 
+  window[
+    `ga-disable-${KARASU_GA_MEASUREMENT_ID}`
+  ] = false;
+
+
   if (window.karasuAnalyticsInitialized) {
     return;
   }
 
+
   window.karasuAnalyticsInitialized =
     true;
+
 
   window.dataLayer =
     window.dataLayer || [];
 
+
   window.gtag =
     window.gtag ||
     function () {
+
       window.dataLayer.push(
         arguments
       );
+
     };
+
 
   window.gtag(
     'js',
     new Date()
   );
+
 
   window.gtag(
     'config',
@@ -38,22 +50,38 @@ function initializeGoogleAnalytics() {
     }
   );
 
+
   const script =
     document.createElement(
       'script'
     );
 
+
   script.async =
     true;
+
 
   script.src =
     `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
       KARASU_GA_MEASUREMENT_ID
     )}`;
 
+
   document.head.appendChild(
     script
   );
+
+}
+
+
+function disableGoogleAnalytics() {
+
+  window[
+    `ga-disable-${KARASU_GA_MEASUREMENT_ID}`
+  ] = true;
+
+
+  deleteGoogleAnalyticsCookies();
 
 }
 
@@ -89,6 +117,7 @@ function saveAnalyticsConsent(
   } catch {
 
     // Consent preference could not be persisted.
+
   }
 
 }
@@ -99,20 +128,29 @@ function deleteGoogleAnalyticsCookies() {
   const cookies =
     document.cookie
       .split(';')
-      .map(cookie =>
-        cookie
-          .split('=')[0]
-          .trim()
+      .map(
+        cookie =>
+          cookie
+            .split('=')[0]
+            .trim()
       )
-      .filter(name =>
-        name === '_ga' ||
-        name.startsWith('_ga_')
+      .filter(
+        name =>
+          name === '_ga' ||
+          name.startsWith('_ga_')
       );
 
-  for (const cookieName of cookies) {
+
+  for (
+    const cookieName
+    of cookies
+  ) {
 
     document.cookie =
       `${cookieName}=; Max-Age=0; path=/; SameSite=Lax`;
+
+    document.cookie =
+      `${cookieName}=; Max-Age=0; path=/; domain=${window.location.hostname}; SameSite=Lax`;
 
   }
 
@@ -126,8 +164,11 @@ function removeConsentBanner() {
       'karasu-consent-banner'
     );
 
+
   if (banner) {
+
     banner.remove();
+
   }
 
 }
@@ -143,13 +184,16 @@ function createConsentBanner() {
       'div'
     );
 
+
   banner.id =
     'karasu-consent-banner';
+
 
   banner.setAttribute(
     'role',
     'dialog'
   );
+
 
   banner.setAttribute(
     'aria-label',
@@ -214,8 +258,10 @@ function createConsentBanner() {
         'style'
       );
 
+
     style.id =
       'karasu-consent-style';
+
 
     style.textContent = `
 
@@ -334,6 +380,7 @@ function createConsentBanner() {
 
     `;
 
+
     document.head.appendChild(
       style
     );
@@ -358,7 +405,9 @@ function createConsentBanner() {
           'granted'
         );
 
+
         removeConsentBanner();
+
 
         initializeGoogleAnalytics();
 
@@ -378,12 +427,70 @@ function createConsentBanner() {
           'denied'
         );
 
-        deleteGoogleAnalyticsCookies();
+
+        disableGoogleAnalytics();
+
 
         removeConsentBanner();
 
       }
     );
+
+}
+
+
+function getAffiliateProgramName(
+  link
+) {
+
+  const dataProgram =
+    String(
+      link.dataset.affiliateProgram ||
+      ''
+    )
+      .replace(
+        /\s+/g,
+        ' '
+      )
+      .trim();
+
+
+  if (dataProgram) {
+
+    return dataProgram;
+
+  }
+
+
+  const label =
+    String(
+      link.textContent ||
+      ''
+    )
+      .replace(
+        /\s+/g,
+        ' '
+      )
+      .trim();
+
+
+  const cleaned =
+    label
+      .replace(
+        /^Explore\s+/i,
+        ''
+      )
+      .replace(
+        /\s*→\s*$/u,
+        ''
+      )
+      .trim();
+
+
+  return (
+    cleaned ||
+    'unknown'
+  );
 
 }
 
@@ -396,7 +503,9 @@ function trackAffiliateClick(
     getAnalyticsConsent() !==
     'granted'
   ) {
+
     return;
+
   }
 
 
@@ -404,32 +513,25 @@ function trackAffiliateClick(
     typeof window.gtag !==
     'function'
   ) {
+
     return;
+
   }
 
 
   const programName =
-    String(
-      link.textContent || ''
-    )
-      .replace(
-        /→/g,
-        ''
-      )
-      .replace(
-        /^Explore\s+/i,
-        ''
-      )
-      .trim();
+    getAffiliateProgramName(
+      link
+    );
 
 
   window.gtag(
     'event',
     'affiliate_click',
     {
+
       program_name:
-        programName ||
-        'unknown',
+        programName,
 
       link_url:
         link.href,
@@ -439,6 +541,7 @@ function trackAffiliateClick(
 
       page_title:
         document.title
+
     }
   );
 
@@ -447,53 +550,40 @@ function trackAffiliateClick(
 
 function registerAffiliateTracking() {
 
-  document.addEventListener(
-    'click',
-    event => {
+  const affiliateLinks =
+    document.querySelectorAll(
+      'a[rel~="sponsored"]'
+    );
 
-      const target =
-        event.target;
+
+  affiliateLinks.forEach(
+    link => {
 
       if (
-        !(target instanceof Element)
+        link.dataset
+          .karasuAffiliateTrackingBound ===
+        'true'
       ) {
+
         return;
+
       }
 
 
-      const link =
-        target.closest(
-          'a'
-        );
-
-      if (!link) {
-        return;
-      }
+      link.dataset
+        .karasuAffiliateTrackingBound =
+        'true';
 
 
-      const relValues =
-        String(
-          link.getAttribute(
-            'rel'
-          ) || ''
-        )
-          .toLowerCase()
-          .split(/\s+/);
+      link.addEventListener(
+        'click',
+        () => {
 
+          trackAffiliateClick(
+            link
+          );
 
-      const isAffiliate =
-        relValues.includes(
-          'sponsored'
-        );
-
-
-      if (!isAffiliate) {
-        return;
-      }
-
-
-      trackAffiliateClick(
-        link
+        }
       );
 
     }
@@ -511,10 +601,13 @@ function registerPrivacySettingsLinks() {
       const target =
         event.target;
 
+
       if (
         !(target instanceof Element)
       ) {
+
         return;
+
       }
 
 
@@ -523,12 +616,16 @@ function registerPrivacySettingsLinks() {
           '[data-karasu-analytics-settings]'
         );
 
+
       if (!settingsLink) {
+
         return;
+
       }
 
 
       event.preventDefault();
+
 
       createConsentBanner();
 
@@ -541,6 +638,7 @@ function registerPrivacySettingsLinks() {
 function startKarasuAnalytics() {
 
   registerAffiliateTracking();
+
 
   registerPrivacySettingsLinks();
 
@@ -563,6 +661,8 @@ function startKarasuAnalytics() {
   if (
     consent === 'denied'
   ) {
+
+    disableGoogleAnalytics();
 
     return;
 
