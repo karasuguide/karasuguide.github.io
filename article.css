@@ -1,786 +1,591 @@
-/* ========================================
-   KARASU ARTICLE LAYOUT
-   Shared home styles are loaded first.
-======================================== */
+const KARASU_GA_MEASUREMENT_ID =
+  'G-TTP4H9CQLL';
 
+const KARASU_CONSENT_KEY =
+  'karasu_analytics_consent';
 
-/* ========================================
-   ARTICLE HERO
-======================================== */
 
-.article-hero {
-  padding:
-    92px 0
-    54px;
-}
+function initializeGoogleAnalytics() {
 
-
-.article-header {
-  width: min(
-    100%,
-    820px
-  );
-
-  margin:
-    0 auto;
-}
-
-
-.article-category {
-  margin:
-    0 0
-    18px;
-
-  color: var(--blue);
-
-  font-size: 11px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
-}
-
-
-.article-header h1 {
-  margin:
-    0 0
-    24px;
-
-  color: var(--text);
-
-  font-size:
-    clamp(
-      40px,
-      5.5vw,
-      60px
-    );
-
-  font-weight: 800;
-
-  line-height: 1.08;
-
-  letter-spacing: -0.048em;
-}
-
-
-.article-summary {
-  max-width: 760px;
-
-  margin:
-    0;
-
-  color: var(--text-secondary);
-
-  font-size:
-    18px;
-
-  line-height: 1.75;
-}
-
-
-/* ========================================
-   ARTICLE META
-======================================== */
-
-.article-meta {
-  width: min(
-    100%,
-    820px
-  );
-
-  margin:
-    30px auto
-    0;
-
-  padding-top:
-    20px;
-
-  display: flex;
-
-  align-items: center;
-
-  flex-wrap: wrap;
-
-  gap:
-    10px 18px;
-
-  border-top:
-    1px solid var(--border);
-
-  color: var(--text-muted);
-
-  font-size: 12px;
-}
-
-
-.article-meta-item {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-}
-
-
-.article-meta-dot {
-  width: 4px;
-
-  height: 4px;
-
-  flex: 0 0 auto;
-
-  border-radius: 999px;
-
-  background: var(--blue);
-}
-
-
-/* ========================================
-   AFFILIATE NOTICE
-======================================== */
-
-.affiliate-notice {
-  width: min(
-    100%,
-    820px
-  );
-
-  margin:
-    0 auto
-    42px;
-
-  padding:
-    18px 20px;
-
-  border:
-    1px solid rgba(88, 169, 255, 0.18);
-
-  border-radius:
-    12px;
-
-  background:
-    rgba(88, 169, 255, 0.055);
-
-  color: var(--text-secondary);
-
-  font-size:
-    13px;
-
-  line-height:
-    1.65;
-}
-
-
-.affiliate-notice strong {
-  color: var(--text);
-
-  font-weight: 700;
-}
-
-
-/* ========================================
-   ARTICLE BODY
-======================================== */
-
-.article-section {
-  padding:
-    0 0
-    96px;
-}
-
-
-.article-content {
-  width: min(
-    100%,
-    820px
-  );
-
-  margin:
-    0 auto;
-
-  color: var(--text-secondary);
-
-  font-size:
-    17px;
-
-  line-height:
-    1.82;
-}
-
-
-.article-content > *:first-child {
-  margin-top: 0;
-}
-
-
-.article-content p {
-  margin:
-    0 0
-    24px;
-}
-
-
-.article-content h2 {
-  margin:
-    64px 0
-    22px;
-
-  padding-top:
-    4px;
-
-  color: var(--text);
-
-  font-size:
-    clamp(
-      27px,
-      3vw,
-      34px
-    );
-
-  font-weight: 760;
-
-  line-height:
-    1.28;
-
-  letter-spacing:
-    -0.035em;
-}
-
-
-.article-content h3 {
-  margin:
-    42px 0
-    16px;
-
-  color: var(--text);
-
-  font-size:
-    22px;
-
-  font-weight:
-    730;
-
-  line-height:
-    1.38;
-
-  letter-spacing:
-    -0.022em;
-}
-
-
-.article-content h4 {
-  margin:
-    32px 0
-    14px;
-
-  color: var(--text);
-
-  font-size:
-    18px;
-}
-
-
-.article-content strong {
-  color: var(--text);
-
-  font-weight:
-    700;
-}
-
-
-.article-content em {
-  color:
-    #c7d1dd;
-}
-
-
-.article-content a {
-  color: var(--blue);
-
-  text-decoration:
-    underline;
-
-  text-decoration-color:
-    rgba(88, 169, 255, 0.35);
-
-  text-underline-offset:
-    3px;
-
-  transition:
-    color 0.2s ease,
-    text-decoration-color 0.2s ease;
-}
-
-
-.article-content a:hover {
-  color:
-    var(--blue-bright);
-
-  text-decoration-color:
-    var(--blue-bright);
-}
-
-
-/* ========================================
-   LISTS
-======================================== */
-
-.article-content ul,
-.article-content ol {
-  margin:
-    0 0
-    28px;
-
-  padding-left:
-    28px;
-}
-
-
-.article-content li {
-  margin:
-    9px 0;
-
-  padding-left:
-    4px;
-}
-
-
-.article-content li::marker {
-  color:
-    var(--blue);
-}
-
-
-/* ========================================
-   BLOCKQUOTES
-======================================== */
-
-.article-content blockquote {
-  margin:
-    34px 0;
-
-  padding:
-    20px 24px;
-
-  border-left:
-    3px solid var(--blue);
-
-  border-radius:
-    0 10px 10px 0;
-
-  background:
-    rgba(255, 255, 255, 0.025);
-
-  color:
-    #c6d0dc;
-}
-
-
-.article-content blockquote p:last-child {
-  margin-bottom: 0;
-}
-
-
-/* ========================================
-   TABLES
-======================================== */
-
-.article-content table {
-  width: 100%;
-
-  margin:
-    32px 0;
-
-  display: block;
-
-  overflow-x: auto;
-
-  border-spacing: 0;
-
-  border-collapse: collapse;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:
-    12px;
-
-  background:
-    rgba(255, 255, 255, 0.015);
-
-  font-size:
-    14px;
-
-  line-height:
-    1.55;
-}
-
-
-.article-content thead {
-  background:
-    rgba(88, 169, 255, 0.07);
-}
-
-
-.article-content th,
-.article-content td {
-  min-width:
-    150px;
-
-  padding:
-    14px 16px;
-
-  text-align:
-    left;
-
-  vertical-align:
-    top;
-
-  border-right:
-    1px solid var(--border);
-
-  border-bottom:
-    1px solid var(--border);
-}
-
-
-.article-content th {
-  color:
-    var(--text);
-
-  font-weight:
-    700;
-}
-
-
-.article-content tr:last-child td {
-  border-bottom: 0;
-}
-
-
-.article-content th:last-child,
-.article-content td:last-child {
-  border-right: 0;
-}
-
-
-/* ========================================
-   CODE
-======================================== */
-
-.article-content code {
-  padding:
-    2px 6px;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:
-    6px;
-
-  background:
-    var(--surface);
-
-  color:
-    #d8e8f8;
-
-  font-family:
-    "SFMono-Regular",
-    Consolas,
-    "Liberation Mono",
-    monospace;
-
-  font-size:
-    0.9em;
-}
-
-
-.article-content pre {
-  margin:
-    30px 0;
-
-  padding:
-    20px;
-
-  overflow-x:
-    auto;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:
-    12px;
-
-  background:
-    #080d13;
-}
-
-
-.article-content pre code {
-  padding:
-    0;
-
-  border:
-    0;
-
-  background:
-    transparent;
-}
-
-
-/* ========================================
-   HORIZONTAL RULE
-======================================== */
-
-.article-content hr {
-  margin:
-    52px 0;
-
-  border:
-    0;
-
-  border-top:
-    1px solid var(--border);
-}
-
-
-/* ========================================
-   ARTICLE END
-======================================== */
-
-.article-end {
-  width: min(
-    100%,
-    820px
-  );
-
-  margin:
-    70px auto
-    0;
-
-  padding:
-    28px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap:
-    30px;
-
-  border:
-    1px solid var(--border);
-
-  border-radius:
-    16px;
-
-  background:
-    linear-gradient(
-      120deg,
-      rgba(88, 169, 255, 0.07),
-      rgba(255, 255, 255, 0.015)
-    );
-}
-
-
-.article-end-copy h2 {
-  margin:
-    0 0
-    7px;
-
-  color:
-    var(--text);
-
-  font-size:
-    19px;
-
-  letter-spacing:
-    -0.02em;
-}
-
-
-.article-end-copy p {
-  margin:
-    0;
-
-  color:
-    var(--text-muted);
-
-  font-size:
-    13px;
-}
-
-
-.article-end-link {
-  flex:
-    0 0 auto;
-
-  min-height:
-    44px;
-
-  padding:
-    0 17px;
-
-  display:
-    inline-flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  gap:
-    8px;
-
-  border:
-    1px solid var(--border-hover);
-
-  border-radius:
-    10px;
-
-  background:
-    var(--blue-soft);
-
-  color:
-    var(--blue-bright);
-
-  font-size:
-    13px;
-
-  font-weight:
-    700;
-
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease;
-}
-
-
-.article-end-link:hover {
-  transform:
-    translateY(-2px);
-
-  background:
-    rgba(88, 169, 255, 0.15);
-}
-
-
-/* ========================================
-   TABLET
-======================================== */
-
-@media (max-width: 900px) {
-
-  .article-hero {
-    padding:
-      78px 0
-      46px;
+  if (window.karasuAnalyticsInitialized) {
+    return;
   }
 
+  window.karasuAnalyticsInitialized =
+    true;
 
-  .article-end {
-    align-items:
-      flex-start;
+  window.dataLayer =
+    window.dataLayer || [];
 
-    flex-direction:
-      column;
-  }
-
-}
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 640px) {
-
-  .article-hero {
-    padding:
-      60px 0
-      38px;
-  }
-
-
-  .article-header h1 {
-    font-size:
-      clamp(
-        36px,
-        11vw,
-        48px
+  window.gtag =
+    window.gtag ||
+    function () {
+      window.dataLayer.push(
+        arguments
       );
+    };
+
+  window.gtag(
+    'js',
+    new Date()
+  );
+
+  window.gtag(
+    'config',
+    KARASU_GA_MEASUREMENT_ID,
+    {
+      send_page_view: true
+    }
+  );
+
+  const script =
+    document.createElement(
+      'script'
+    );
+
+  script.async =
+    true;
+
+  script.src =
+    `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+      KARASU_GA_MEASUREMENT_ID
+    )}`;
+
+  document.head.appendChild(
+    script
+  );
+
+}
+
+
+function getAnalyticsConsent() {
+
+  try {
+
+    return localStorage.getItem(
+      KARASU_CONSENT_KEY
+    );
+
+  } catch {
+
+    return null;
+
+  }
+
+}
+
+
+function saveAnalyticsConsent(
+  value
+) {
+
+  try {
+
+    localStorage.setItem(
+      KARASU_CONSENT_KEY,
+      value
+    );
+
+  } catch {
+
+    // Consent preference could not be persisted.
+  }
+
+}
+
+
+function deleteGoogleAnalyticsCookies() {
+
+  const cookies =
+    document.cookie
+      .split(';')
+      .map(cookie =>
+        cookie
+          .split('=')[0]
+          .trim()
+      )
+      .filter(name =>
+        name === '_ga' ||
+        name.startsWith('_ga_')
+      );
+
+  for (const cookieName of cookies) {
+
+    document.cookie =
+      `${cookieName}=; Max-Age=0; path=/; SameSite=Lax`;
+
+  }
+
+}
+
+
+function removeConsentBanner() {
+
+  const banner =
+    document.getElementById(
+      'karasu-consent-banner'
+    );
+
+  if (banner) {
+    banner.remove();
+  }
+
+}
+
+
+function createConsentBanner() {
+
+  removeConsentBanner();
+
+
+  const banner =
+    document.createElement(
+      'div'
+    );
+
+  banner.id =
+    'karasu-consent-banner';
+
+  banner.setAttribute(
+    'role',
+    'dialog'
+  );
+
+  banner.setAttribute(
+    'aria-label',
+    'Analytics preferences'
+  );
+
+
+  banner.innerHTML = `
+    <div class="karasu-consent-inner">
+
+      <div class="karasu-consent-copy">
+
+        <strong>
+          Analytics preferences
+        </strong>
+
+        <p>
+          Karasu uses Google Analytics
+          to understand site usage and improve our guides.
+          Analytics is only enabled if you accept.
+          See our
+          <a href="/privacy.html">
+            Privacy Policy
+          </a>.
+        </p>
+
+      </div>
+
+
+      <div class="karasu-consent-actions">
+
+        <button
+          type="button"
+          id="karasu-consent-decline"
+          class="karasu-consent-button karasu-consent-secondary"
+        >
+          Decline
+        </button>
+
+        <button
+          type="button"
+          id="karasu-consent-accept"
+          class="karasu-consent-button karasu-consent-primary"
+        >
+          Accept analytics
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+
+  if (
+    !document.getElementById(
+      'karasu-consent-style'
+    )
+  ) {
+
+    const style =
+      document.createElement(
+        'style'
+      );
+
+    style.id =
+      'karasu-consent-style';
+
+    style.textContent = `
+
+      #karasu-consent-banner {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        margin: 0 auto;
+        max-width: 920px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        background: #111923;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        color: #d8e1eb;
+      }
+
+
+      .karasu-consent-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: 20px 22px;
+      }
+
+
+      .karasu-consent-copy {
+        min-width: 0;
+      }
+
+
+      .karasu-consent-copy strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #f3f7fb;
+        font-size: 15px;
+      }
+
+
+      .karasu-consent-copy p {
+        margin: 0;
+        color: #9eabb9;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+
+      .karasu-consent-copy a {
+        color: #72b7ff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+
+      .karasu-consent-actions {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
+      }
+
+
+      .karasu-consent-button {
+        min-height: 42px;
+        padding: 0 15px;
+        border-radius: 9px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+
+      .karasu-consent-primary {
+        border: 1px solid rgba(88, 169, 255, 0.4);
+        background: rgba(88, 169, 255, 0.14);
+        color: #82c0ff;
+      }
+
+
+      .karasu-consent-secondary {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: #b7c2ce;
+      }
+
+
+      @media (max-width: 640px) {
+
+        #karasu-consent-banner {
+          right: 12px;
+          bottom: 12px;
+          left: 12px;
+        }
+
+
+        .karasu-consent-inner {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 16px;
+          padding: 18px;
+        }
+
+
+        .karasu-consent-actions {
+          width: 100%;
+        }
+
+
+        .karasu-consent-button {
+          flex: 1;
+        }
+
+      }
+
+    `;
+
+    document.head.appendChild(
+      style
+    );
+
   }
 
 
-  .article-summary {
-    font-size:
-      16px;
+  document.body.appendChild(
+    banner
+  );
+
+
+  document
+    .getElementById(
+      'karasu-consent-accept'
+    )
+    ?.addEventListener(
+      'click',
+      () => {
+
+        saveAnalyticsConsent(
+          'granted'
+        );
+
+        removeConsentBanner();
+
+        initializeGoogleAnalytics();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      'karasu-consent-decline'
+    )
+    ?.addEventListener(
+      'click',
+      () => {
+
+        saveAnalyticsConsent(
+          'denied'
+        );
+
+        deleteGoogleAnalyticsCookies();
+
+        removeConsentBanner();
+
+      }
+    );
+
+}
+
+
+function trackAffiliateClick(
+  link
+) {
+
+  if (
+    getAnalyticsConsent() !==
+    'granted'
+  ) {
+    return;
   }
 
 
-  .article-content {
-    font-size:
-      16px;
-
-    line-height:
-      1.78;
+  if (
+    typeof window.gtag !==
+    'function'
+  ) {
+    return;
   }
 
 
-  .article-content h2 {
-    margin-top:
-      50px;
+  const programName =
+    String(
+      link.textContent || ''
+    )
+      .replace(
+        /→/g,
+        ''
+      )
+      .replace(
+        /^Explore\s+/i,
+        ''
+      )
+      .trim();
 
-    font-size:
-      27px;
+
+  window.gtag(
+    'event',
+    'affiliate_click',
+    {
+      program_name:
+        programName ||
+        'unknown',
+
+      link_url:
+        link.href,
+
+      page_path:
+        window.location.pathname,
+
+      page_title:
+        document.title
+    }
+  );
+
+}
+
+
+function registerAffiliateTracking() {
+
+  document.addEventListener(
+    'click',
+    event => {
+
+      const target =
+        event.target;
+
+      if (
+        !(target instanceof Element)
+      ) {
+        return;
+      }
+
+
+      const link =
+        target.closest(
+          'a'
+        );
+
+      if (!link) {
+        return;
+      }
+
+
+      const relValues =
+        String(
+          link.getAttribute(
+            'rel'
+          ) || ''
+        )
+          .toLowerCase()
+          .split(/\s+/);
+
+
+      const isAffiliate =
+        relValues.includes(
+          'sponsored'
+        );
+
+
+      if (!isAffiliate) {
+        return;
+      }
+
+
+      trackAffiliateClick(
+        link
+      );
+
+    }
+  );
+
+}
+
+
+function registerPrivacySettingsLinks() {
+
+  document.addEventListener(
+    'click',
+    event => {
+
+      const target =
+        event.target;
+
+      if (
+        !(target instanceof Element)
+      ) {
+        return;
+      }
+
+
+      const settingsLink =
+        target.closest(
+          '[data-karasu-analytics-settings]'
+        );
+
+      if (!settingsLink) {
+        return;
+      }
+
+
+      event.preventDefault();
+
+      createConsentBanner();
+
+    }
+  );
+
+}
+
+
+function startKarasuAnalytics() {
+
+  registerAffiliateTracking();
+
+  registerPrivacySettingsLinks();
+
+
+  const consent =
+    getAnalyticsConsent();
+
+
+  if (
+    consent === 'granted'
+  ) {
+
+    initializeGoogleAnalytics();
+
+    return;
+
   }
 
 
-  .article-content h3 {
-    margin-top:
-      36px;
+  if (
+    consent === 'denied'
+  ) {
 
-    font-size:
-      21px;
+    return;
+
   }
 
 
-  .article-content ul,
-  .article-content ol {
-    padding-left:
-      23px;
-  }
+  createConsentBanner();
+
+}
 
 
-  .affiliate-notice {
-    margin-bottom:
-      34px;
-  }
+if (
+  document.readyState ===
+  'loading'
+) {
 
+  document.addEventListener(
+    'DOMContentLoaded',
+    startKarasuAnalytics
+  );
 
-  .article-section {
-    padding-bottom:
-      74px;
-  }
+} else {
 
-
-  .article-end {
-    margin-top:
-      56px;
-
-    padding:
-      22px;
-  }
-
-
-  .article-end-link {
-    width:
-      100%;
-  }
+  startKarasuAnalytics();
 
 }
