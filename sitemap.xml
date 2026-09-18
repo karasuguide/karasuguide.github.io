@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://karasuguide.github.io/</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
   </url>
   <url>
     <loc>https://karasuguide.github.io/guides/how-to-choose-email-automation-software.html</loc>
@@ -51,5 +51,9 @@
   <url>
     <loc>https://karasuguide.github.io/guides/how-to-choose-a-newsletter-platform-for-an-independent-b2b-publication-in-2026.html</loc>
     <lastmod>2026-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://karasuguide.github.io/guides/how-to-choose-a-newsletter-platform-when-migrating-from-substack-in-2026.html</loc>
+    <lastmod>2026-09-18</lastmod>
   </url>
 </urlset>
