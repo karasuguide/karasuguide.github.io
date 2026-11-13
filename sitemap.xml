@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://karasuguide.com/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://karasuguide.com/guides/how-to-choose-email-automation-software.html</loc>
@@ -239,5 +239,9 @@
   <url>
     <loc>https://karasuguide.com/guides/zoho-crm-review-features-tradeoffs-and-who-it-fits-in-2026.html</loc>
     <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://karasuguide.com/guides/migrating-from-kit-to-mailerlite-what-creators-should-evaluate-before-switching.html</loc>
+    <lastmod>2026-11-13</lastmod>
   </url>
 </urlset>
