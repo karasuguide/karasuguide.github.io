@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://karasuguide.com/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://karasuguide.com/guides/how-to-choose-email-automation-software.html</loc>
@@ -279,5 +279,9 @@
   <url>
     <loc>https://karasuguide.com/guides/beehiiv-vs-wordpress-which-fits-a-newsletter-led-publication-in-2026.html</loc>
     <lastmod>2026-11-21</lastmod>
+  </url>
+  <url>
+    <loc>https://karasuguide.com/guides/migrating-from-ghost-to-beehiiv-what-newsletter-publishers-should-evaluate-before-switching.html</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
 </urlset>
